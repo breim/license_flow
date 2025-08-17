@@ -1,0 +1,20 @@
+<%= form_with model: [:admin, @product], local: true do |form| %>
+  <%= render 'components/form_errors', object: @product %>
+
+  <h2>Product</h2>
+  
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description, rows: 4 %>
+  </div>
+
+  <div>
+    <%= link_to 'Cancel', admin_products_path %>
+    <%= form.submit 'Save' %>
+  </div>
+<% end %>
