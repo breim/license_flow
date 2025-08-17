@@ -1,0 +1,13 @@
+{
+  "editor.formatOnSave": true,
+  "[ruby]": {
+    "editor.defaultFormatter": "Shopify.ruby-lsp",
+    "editor.tabSize": 2,
+  },
+  "rubyLsp.enabledFeatures": {
+    "inlayHint": false,
+  },
+  "rubyLsp.rubyVersionManager": {
+    "identifier": "rvm"
+  }
+}
