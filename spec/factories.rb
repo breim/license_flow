@@ -28,5 +28,12 @@ FactoryBot.define do
     association :account
     association :user
     association :product
+
+    after(:build) do |license_assignment|
+      create(:subscription,
+             account: license_assignment.account,
+             product: license_assignment.product,
+             number_of_licenses: 10)
+    end
   end
 end

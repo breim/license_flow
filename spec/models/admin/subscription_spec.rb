@@ -17,4 +17,11 @@ RSpec.describe Subscription, type: :model do
     it { should validate_presence_of(:issued_at) }
     it { should validate_presence_of(:expires_at) }
   end
+
+  describe 'available_licenses' do
+    it 'returns the number of available licenses' do
+      subscription = create(:subscription)
+      expect(subscription.available_licenses).to eq(subscription.number_of_licenses)
+    end
+  end
 end
