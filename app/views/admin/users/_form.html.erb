@@ -1,0 +1,32 @@
+<%= form_with model: [:admin, @user], local: true do |form| %>
+  <%= render 'components/form_errors', object: @user %>
+
+  <div>
+    <div>
+      <h2>User</h2>
+      <div>
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+      </div>
+
+      <div>
+        <%= form.label :email %>
+        <%= form.email_field :email %>
+      </div>
+
+      <div>
+        <%= form.label :account %>
+        <%= form.collection_select :account_id, Account.all, :id, :name, 
+          { prompt: 'Select one account' }, 
+          { 
+            id: 'account_id'
+          } %>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <%= link_to 'Cancel', admin_users_path %>
+    <%= form.submit 'Save' %>
+  </div>
+<% end %>

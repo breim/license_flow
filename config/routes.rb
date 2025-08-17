@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'admin', to: redirect('/admin/accounts')
 
   namespace :admin do
-    resources :accounts, :products
+    resources :accounts, :products, :users
   end
 
   get 'up' => 'rails/health#show', as: :rails_health_check
