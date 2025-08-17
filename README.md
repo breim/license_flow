@@ -32,9 +32,9 @@ License Flow is a Rails application that provides:
 - **Ruby**: 3.2.2
 - **Rails**: 8.0.2+
 - **Database**: PostgreSQL 15
-- **Frontend**: Stimulus, Turbo, Importmap
-- **Testing**: RSpec, FactoryBot, Capybara
-- **Code Quality**: RuboCop, Brakeman
+- **Frontend**: Stimulus
+- **Testing**: RSpec, FactoryBot
+- **Code Quality**: RuboCop
 - **Containerization**: Docker & Docker Compose
 
 ## 🗂 Project Structure
@@ -123,6 +123,10 @@ If you prefer to run locally:
 ```bash
 # Install dependencies
 bundle install
+
+# Create your config/application.yml with your database configuraion (example)
+LICENSE_FLOW_DATABASE_USERNAME: <your_db_username>
+LICENSE_FLOW_DATABASE_PASSWORD: <your_db_password>
 
 # Setup database
 rails db:create db:migrate db:seed
