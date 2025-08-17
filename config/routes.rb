@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'admin', to: redirect('/admin/accounts')
 
   namespace :admin do
-    resources :accounts, :products, :users
+    resources :products, :users
 
     resources :accounts do
       resources :subscriptions
