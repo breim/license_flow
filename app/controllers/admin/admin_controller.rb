@@ -2,7 +2,7 @@
 
 module Admin
   class AdminController < ApplicationController
-    # layout 'admin'
+    layout 'admin'
     respond_to :html
   end
 end
