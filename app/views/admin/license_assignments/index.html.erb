@@ -1,0 +1,46 @@
+<h1>Account: <%= @account.name %></h1>
+
+<%= render 'components/form_errors', object: @license_assignment %>
+
+<div data-controller="license-assignments">
+  <div style="display: flex; gap: 60px; align-items: flex-start;">
+    <div>
+      <h3>Product Licenses</h3>
+      <select multiple size="12" 
+              data-license-assignments-target="productsAvailable" 
+              style="width:300px;">
+        <% @subscriptions.each do |subscription| %>
+          <option value="<%= subscription.product.id %>">
+            <%= subscription.product.name %> (<%= subscription.available_licenses %>/<%= subscription.number_of_licenses %>)
+          </option>
+        <% end %>
+      </select>
+    </div>
+
+    <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 20px; margin-top: 60px;">
+      <%= form_with url: admin_account_license_assignments_path(@account),
+                    local: true,
+                    data: { 'license-assignments-target': 'assignForm' } do |form| %>
+        <button type="submit" class="btn" data-action="license-assignments#submitAssign">Assign</button>
+      <% end %>
+
+      <%= form_with url: admin_account_license_assignment_path(@account, 0, batch: true),
+                    method: :delete,
+                    local: true,
+                    data: { 'license-assignments-target': 'unassignForm' } do |form| %>
+        <button type="submit" class="btn btn-secondary" data-action="license-assignments#submitUnassign">Unassign</button>
+      <% end %>
+    </div>
+
+    <div>
+      <h3>Users</h3>
+      <select multiple size="12" 
+              data-license-assignments-target="usersAvailable" 
+              style="width:300px;">
+        <% @users.each do |user| %>
+          <option value="<%= user.id %>"><%= user.name %> (<%= user.email %>)</option>
+        <% end %>
+      </select>
+    </div>
+  </div>
+</div>

@@ -34,5 +34,11 @@
     <div>
       <%= render 'admin/subscriptions/subscriptions', subscriptions: @account.subscriptions %>
     </div>
+
+    <hr />
+
+    <div>
+      <%= render 'admin/license_assignments/license_assignments', license_assignments: @account.license_assignments.includes(:user, :product).order(created_at: :desc) %>
+    </div>
   </div>
 </div>

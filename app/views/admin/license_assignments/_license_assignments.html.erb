@@ -1,0 +1,58 @@
+<div>
+  <div>
+    <h2>
+      License Assignments
+    </h2>
+  </div>
+
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Product</th>
+          <th>Assigned At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% license_assignments.each do |assignment| %>
+          <tr>
+            <td>
+              <div>
+                <div>
+                  <%= assignment.user.name %>
+                </div>
+                <div>
+                  <%= assignment.user.email %>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div>
+                <div>
+                  <%= assignment.product.name %>
+                </div>
+              </div>
+            </td>
+            <td>
+              <%= assignment.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+            </td>
+            <td>
+              <%= link_to admin_account_license_assignment_path(@account, assignment), 
+                  data: { 
+                    "turbo-method": :delete,
+                    confirm: "Are you sure you want to remove the license for #{assignment.product.name} from #{assignment.user.name}?" 
+                  } do %>
+                Remove
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <%= link_to " Assign License", admin_account_license_assignments_path(@account) %>
+  </div>
+</div>

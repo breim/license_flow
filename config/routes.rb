@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
     resources :accounts do
       resources :subscriptions
+      resources :license_assignments
     end
   end
 
