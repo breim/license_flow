@@ -1,0 +1,52 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: license_flow_development
+      POSTGRES_USER: license_flow
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "PGPASSWORD=password pg_isready -U license_flow -d license_flow_development",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      RAILS_ENV: development
+      LICENSE_FLOW_DATABASE_USERNAME: license_flow
+      LICENSE_FLOW_DATABASE_PASSWORD: password
+      LICENSE_FLOW_DATABASE_HOST: postgres
+      DATABASE_URL: postgres://license_flow:password@postgres:5432/license_flow_development
+    volumes:
+      - .:/rails
+      - bundle_cache:/usr/local/bundle
+    command: >
+      bash -c "
+        bundle exec rails db:create &&
+        bundle exec rails db:migrate &&
+        bundle exec rails db:seed &&
+        bundle exec rails server -b 0.0.0.0 -p 3000
+      "
+
+volumes:
+  postgres_data:
+  bundle_cache:
