@@ -20,16 +20,19 @@
     </h2>
     <div>
       <div>
-        <div>
-          <p>Account Name</p>
-          <p><%= @account.name %></p>
-        </div>
+        <p>Account Name</p>
+        <p><%= @account.name %></p>
       </div>
       <div>
-        <div>
-          <p>Created On</p>
-          <p><%= @account.created_at.strftime("%B %d, %Y") %></p>
-        </div>
+        <p>Created On</p>
+        <p><%= @account.created_at.strftime("%B %d, %Y") %></p>
       </div>
     </div>
+
+    <hr/>
+
+    <div>
+      <%= render 'admin/subscriptions/subscriptions', subscriptions: @account.subscriptions %>
+    </div>
   </div>
+</div>
