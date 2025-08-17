@@ -1,0 +1,12 @@
+<% if object && object.errors.any? %>
+  <div style="background-color: #fca5a5; padding: 10px; border-radius: 5px;">
+    <h4>
+      <%= pluralize(object.errors.count, "error") %> when saving <%= object.class.name.downcase %>
+    </h4>
+    <ul>
+      <% object.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
