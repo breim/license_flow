@@ -1,0 +1,47 @@
+<div>
+  <div>
+    <h3>
+      <%= @subscription.persisted? ? "Edit Subscription" : "Create New Subscription" %>
+    </h3>
+    <p>Configure subscription details for <b><%= @account.name %></b></p>
+  </div>
+
+  <%= form_with model: [:admin, @account, @subscription], local: true do |form| %>
+    <%= render 'components/form_errors', object: @subscription %>
+
+    <div>
+      <%= form.label :product_id %>
+      <%= form.select :product_id, 
+          options_from_collection_for_select(@products, :id, :name, @subscription.product_id),
+          { prompt: "Select a product" } %>
+    </div>
+
+    <div>
+      <%= form.label :number_of_licenses %>
+      <%= form.number_field :number_of_licenses, 
+          min: 1, 
+          placeholder: "Enter number of licenses",
+          value: @subscription.number_of_licenses %>
+    </div>
+
+    <div>
+      <div>
+        <%= form.label :issued_at %>
+        <%= form.datetime_local_field :issued_at, 
+            value: @subscription.issued_at&.strftime("%Y-%m-%dT%H:%M") || Time.current.strftime("%Y-%m-%dT%H:%M") %>
+      </div>
+
+      <div>
+        <%= form.label :expires_at %>
+        <%= form.datetime_local_field :expires_at, 
+            value: @subscription.expires_at&.strftime("%Y-%m-%dT%H:%M") %>
+      </div>
+    </div>
+
+    <div style="margin-top: 10px; display: flex; gap: 10px;">
+      <%= link_to "Cancel", :back %>
+      
+      <%= form.submit (@subscription.persisted? ? "Update Subscription" : "Create Subscription") %>
+    </div>
+  <% end %>
+</div>

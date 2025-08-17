@@ -6,6 +6,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :accounts, :products, :users
+
+    resources :accounts do
+      resources :subscriptions
+    end
   end
 
   get 'up' => 'rails/health#show', as: :rails_health_check

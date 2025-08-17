@@ -1,0 +1,46 @@
+<div>
+  <h2>Subscriptions</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Product</th>
+        <th>Licenses</th>
+        <th>Issued At</th>
+        <th>Expires At</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% subscriptions.each do |subscription| %>
+        <tr>
+          <td><%= subscription.id %></td>
+          <td><%= subscription.product.name %></td>
+          <td><%= subscription.number_of_licenses %></td>
+          <td><%= subscription.issued_at.strftime("%d/%m/%Y %H:%M") if subscription.issued_at %></td>
+          <td><%= subscription.expires_at.strftime("%d/%m/%Y %H:%M") if subscription.expires_at %></td>
+          <td>
+            <% if subscription.expires_at && subscription.expires_at < Time.current %>
+              Expired
+            <% elsif subscription.issued_at && subscription.issued_at > Time.current %>
+              Pending
+            <% else %>
+              Active
+            <% end %>
+          </td>
+          <td>
+            <%= link_to "Edit", edit_admin_account_subscription_path(@account, subscription) %>
+            <%= link_to "Delete", admin_account_subscription_path(@account, subscription),
+                  data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this subscription?" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div>
+    <%= link_to 'Create new subscription', new_admin_account_subscription_path(@account) %>
+  </div>
+</div>
