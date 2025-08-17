@@ -1,26 +1,32 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :license_assignment do
-    account { nil }
-    user { nil }
-    product { nil }
+  factory :account do
+    name { Faker::Company.name }
   end
 
-  factory :subscription do
-    account { nil }
-    product { nil }
-    number_of_licenses { 1 }
-    issued_at { '2025-08-17 07:57:35' }
-    expires_at { '2025-08-17 07:57:35' }
+  factory :user do
+    name { Faker::Name.name }
+    email { Faker::Internet.unique.email }
+    association :account
   end
 
   factory :product do
-    name { 'MyString' }
-    description { 'MyText' }
+    name { Faker::Commerce.product_name }
+    description { Faker::Lorem.paragraph }
   end
 
-  factory :account do
-    name { Faker::Company.name }
+  factory :subscription do
+    association :account
+    association :product
+    number_of_licenses { Faker::Number.between(from: 1, to: 100) }
+    issued_at { Faker::Time.between(from: 1.year.ago, to: Time.current) }
+    expires_at { Faker::Time.between(from: Time.current, to: 2.years.from_now) }
+  end
+
+  factory :license_assignment do
+    association :account
+    association :user
+    association :product
   end
 end
