@@ -1,16 +1,28 @@
-<p style="color: green"><%= notice %></p>
-
-<% content_for :title, "Accounts" %>
-
 <h1>Accounts</h1>
-
-<div id="admin_accounts">
-  <% @admin_accounts.each do |admin_account| %>
-    <%= render admin_account %>
-    <p>
-      <%= link_to "Show this account", admin_account %>
-    </p>
-  <% end %>
+<p>A list of all accounts in your system.</p>
+<div>
+  <%= link_to 'Create new account', new_admin_account_path %>
 </div>
-
-<%= link_to "New account", new_admin_account_path %>
+<table>
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">
+        <span>Actions</span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= account.id %></td>
+        <td><%= account.name %></td>
+        <td>
+          <%= link_to 'Show', admin_account_path(account) %>
+          <%= link_to 'Edit', edit_admin_account_path(account) %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

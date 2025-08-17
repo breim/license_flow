@@ -1,10 +1,35 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @account %>
-
 <div>
-  <%= link_to "Edit this account", edit_admin_account_path(@account) %> |
-  <%= link_to "Back to accounts", admin_accounts_path %>
+  <div>
+    <h1>Account: <%= @account.name %></h1>
+    <p>Account Details</p>
+  </div>
+  <div>
+    <%= link_to edit_admin_account_path(@account) do %>
+      Edit Account
+    <% end %>
+    <%= link_to admin_accounts_path do %>
+      All Accounts
+    <% end %>
+  </div>
 
-  <%= button_to "Destroy this account", @account, method: :delete %>
-</div>
+  <hr />
+
+  <div>
+    <h2>
+      Account Information
+    </h2>
+    <div>
+      <div>
+        <div>
+          <p>Account Name</p>
+          <p><%= @account.name %></p>
+        </div>
+      </div>
+      <div>
+        <div>
+          <p>Created On</p>
+          <p><%= @account.created_at.strftime("%B %d, %Y") %></p>
+        </div>
+      </div>
+    </div>
+  </div>
