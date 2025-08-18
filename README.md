@@ -4,7 +4,9 @@ License management system for subscription control and product license distribut
 
 
 ## ⚠️ Development Notes
-
+```diff
+- The recruiter allocated only 4 hours for me to finish this project (continuous work time), with a 48-hour timeframe. Business hours were not specified.
+```
 ### Architecture Considerations
 
 Given more development time, I would have preferred to implement the `license_assignment` functionality using **Service Objects** to keep the controllers cleaner and follow Single Responsibility Principle more strictly. However, due to time constraints, I focused on delivering a working solution within the allocated timeframe.
